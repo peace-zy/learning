@@ -1,4 +1,4 @@
-![](docs/images/icon.jpg)
+![](docs/images/icon.png)
 # Learning
 - [CV](#CV)
     - [Detection](#Detection)
