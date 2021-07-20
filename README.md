@@ -1,17 +1,17 @@
 # Learning
 
-- [cv](#cv)
+- [CV](#CV)
     - [detection](#detection)
     - [classification](#classification)
     - [segmentation](#segmentation)
 - [nlp](#nlp)
     - [transformer](#transformer)
 
-## cv
+## CV
 
-## [detection]
+### [detection]
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-## nlp
+## NLP
 
 ```markdown
 Syntax highlighted code block
