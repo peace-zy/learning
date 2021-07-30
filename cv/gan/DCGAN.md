@@ -3,3 +3,7 @@ https://www.sohu.com/a/136555688_473283/
 
 GAN原理学习笔记
 https://zhuanlan.zhihu.com/p/27295635
+
+
+Context Encoders: Feature Learning by Inpainting
+https://zhuanlan.zhihu.com/p/62953159
