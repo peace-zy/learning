@@ -19,3 +19,6 @@ https://blog.csdn.net/ch18328071580/article/details/96721665
 
 CycleGAN原理及实验（TensorFlow）
 https://www.jianshu.com/p/64bf39804c80
+
+CycleGAN原理以及代码全解析
+https://zhuanlan.zhihu.com/p/37198143
