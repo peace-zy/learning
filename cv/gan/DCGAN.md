@@ -16,3 +16,6 @@ https://blog.csdn.net/qq_41967539/article/details/102844372
 
 GAN的系列经典模型讲解
 https://blog.csdn.net/ch18328071580/article/details/96721665
+
+CycleGAN原理及实验（TensorFlow）
+https://www.jianshu.com/p/64bf39804c80
