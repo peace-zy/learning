@@ -24,3 +24,6 @@ CycleGAN原理以及代码全解析
 https://zhuanlan.zhihu.com/p/37198143
 
 https://www.cnblogs.com/a-little-v/p/9762599.html
+
+【学习笔记】生成模型——生成对抗网络
+http://www.gwylab.com/note-gans.html
