@@ -1,0 +1,2 @@
+    https://blog.csdn.net/Houchaoqun_XMU/article/details/80146710
+    【Active Learning - 01】深入学习“主动学习”：如何显著地减少标注代价
