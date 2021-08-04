@@ -1,2 +1,44 @@
     https://blog.csdn.net/Houchaoqun_XMU/article/details/80146710
     【Active Learning - 01】深入学习“主动学习”：如何显著地减少标注代价
+
+
+
+
+
+
+
+开源代码	谷歌开源的active-learning仓库	python 2.7	
+github star 443
+active learning的开源代码
+
+
+开源工具	
+https://github.com/modAL-python/modAL
+官方文档 https://modal-python.readthedocs.io/en/latest/content/overview/Extending-modAL.html
+python 3	
+github most star 522
+官方文档足够详细
+Pool-based sampling 
+Stream-based sampling
+Active regression
+Ensemble regression
+Bayesian optimization
+Query by committee
+Bootstrapping and bagging
+Keras integration
+
+推荐使用
+https://github.com/ntucllab/libact
+官方文档 https://libact.readthedocs.io/en/latest/
+python 3	
+github star 518
+Pool-based active learning in Python
+2017
+官方案例比较少，文档不够详细
+Python 2.7, 3.3, 3.4, 3.5, 3.6
+
+https://github.com/NUAA-AL/ALiPy	python 3	
+github star 334
+南航设计
+2019
+校园网限制，打开不了官方文档
