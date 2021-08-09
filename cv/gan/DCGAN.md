@@ -27,3 +27,6 @@ https://www.cnblogs.com/a-little-v/p/9762599.html
 
 【学习笔记】生成模型——生成对抗网络
 http://www.gwylab.com/note-gans.html
+
+GAN 和 VAE 的本质区别是什么？为什么两者总是同时被提起？
+https://www.zhihu.com/question/317623081
