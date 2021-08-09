@@ -30,3 +30,6 @@ http://www.gwylab.com/note-gans.html
 
 GAN 和 VAE 的本质区别是什么？为什么两者总是同时被提起？
 https://www.zhihu.com/question/317623081
+
+漫谈VAE和VQVAE，从连续分布到离散分布
+https://zhuanlan.zhihu.com/p/388299884
