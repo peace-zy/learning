@@ -269,6 +269,89 @@ std::string longest_huiwen(const std::string& arr) {
     return arr.substr(start, max_len);
 }
 
+std::string longest_huiwen_twice(const std::string& arr) {
+    int size = arr.size();
+    int start = 0;
+    int max_len = 0;
+    if (size < 2) {
+        return arr;
+    }
+    std::vector<std::vector<int>> dp(size, std::vector<int>(size));
+
+    for (int right = 0; right < size; ++right) {
+        for (int left = 0; left <= right; ++left) {
+            int win = right - left + 1;
+            if (win == 1) {
+                dp[left][right] = 1;
+            } else if (win == 2) {
+                dp[left][right] = (arr[left] == arr[right]); 
+            } else {
+                dp[left][right] = dp[left + 1][right-1] && (arr[left] == arr[right]);
+            }
+            if (dp[left][right] && win > max_len) {
+                max_len = win;
+                start = left;
+            }
+        }
+    }
+    return arr.substr(start, max_len);
+}
+
+int center_longest(const std::string& arr, 
+                                   int left,
+                                   int right) {
+    while(left >= 0 && right < arr.size() && arr[left] == arr[right]) {
+        left--;
+        right++;
+    }
+    // 终止是left多向左移动一步，right多向右移动一步
+    return right -1  - (left + 1) + 1;
+}
+
+std::string longest_huiwen_new(const std::string& arr) {
+    int size = arr.size();
+
+    if (size < 2) {
+        return arr;
+    }
+    int start = 0, end = 0;
+    for (int i = 0; i < size; ++i) {
+
+        int len1 = center_longest(arr, i, i);
+        int len2 = center_longest(arr, i, i + 1);
+        int len = std::max(len1, len2);
+        if (len > (end - start)) {
+            start = i - (len - 1)/ 2;  // 为兼容长度为1或2扩散
+            end = i + len / 2;
+        }
+    }
+    
+
+    return arr.substr(start, end - start + 1);
+}
+
+
+int vol_water(const std::vector<int>& arr) {
+    int n =  arr.size();
+    int sum = 0;
+    for (int i = 1; i < n -1; ++i) {
+        int left_max = 0;
+        for (int j = 0; j <= i; ++j) {
+            if (arr[j] > left_max) {
+                left_max = arr[j];
+            }
+        }
+        int right_max = 0;
+        for (int j = i; j < n; ++j) {
+            if (arr[j] > right_max) {
+                right_max = arr[j];
+            }
+        }
+        sum += (std::min(left_max, right_max) - arr[i]);
+    }
+    return sum;
+}
+
 int main(int argc, char* argv[]) {
     //std::cout << "hello word" << std::endl;
     //printf("hello word!");
@@ -307,6 +390,8 @@ int main(int argc, char* argv[]) {
     std::cout << find_max_common_sub_str(first, second);*/
     //std::string arr = "babad";
     std::string arr = "adbbdcmabbamc";
-    std::cout << longest_huiwen(arr) << std::endl;
+    std::cout << longest_huiwen_twice(arr) << std::endl;
+    /*std::vector<int> arr = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+    std::cout << vol_water(arr) << std::endl;*/
     return 0;
 }
