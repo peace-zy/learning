@@ -6,3 +6,12 @@ nginx 拼url
  5) vim conf/nginx.conf 修改端口号和默认location
  6) ./sbin/nginx 启动
  7) ./sbin/nginx -s stop 停止   ./sbin/nginx -s reload 重启
+
+
+【默认不显示文件列表】
+在conf/nginx.conf 里添加
+autoindex on;  # 开启目录文件列表
+autoindex_exact_size on;  # 显示出文件的确切大小，单位是bytes
+autoindex_localtime on;  # 显示的文件时间为文件的服务器时间
+charset utf-8,gbk;  # 避免中文乱码
+
