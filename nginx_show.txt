@@ -1,0 +1,8 @@
+nginx 拼url
+ 1) wget http://nginx.org/download/nginx-1.19.1.tar.gz
+ 2) tar zxvf nginx-1.9.9.tar.gz
+ 3) ./configure --prefix=/home/users/sunbin/nginx --with-http_ssl_module --with-http_stub_status_module --with-pcre
+ 4) make;make install
+ 5) vim conf/nginx.conf 修改端口号和默认location
+ 6) ./sbin/nginx 启动
+ 7) ./sbin/nginx -s stop 停止   ./sbin/nginx -s reload 重启
