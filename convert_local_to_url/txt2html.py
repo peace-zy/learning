@@ -35,7 +35,7 @@ def txt2html(args):
 
 <!--jspart-->
 <script language="javascript" type="text/javascript">
-      function save(sender) {
+      function update(sender) {
           console.log(sender);
           sender.defaultChecked = !sender.defaultChecked;
           sender.checked = sender.defaultChecked;
@@ -101,9 +101,9 @@ def txt2html(args):
         c = 0
         for r in regions:
             select = """<label class="radio-inline" style="font-family: 'Microsoft YaHei UI';font-size: large;">
-                        <input type="radio" name="result{}" id="optionsRadios{}" value="Right" onclick="save(this)" />Right</label>
+                        <input type="radio" name="result{}" id="optionsRadios{}" value="Right" onclick="update(this)" />Right</label>
                         <label class="radio-inline" style="font-family: 'Microsoft YaHei UI';font-size: large;">
-                       <input type="radio" name="result{}" id="optionsRadios{}" value="Wrong" onclick="save(this)" />Wrong</label>""".\
+                       <input type="radio" name="result{}" id="optionsRadios{}" value="Wrong" onclick="update(this)" />Wrong</label>""".\
                        format(id_r, c, id_r, c + 1)
             c += 2
             id_r += 2
