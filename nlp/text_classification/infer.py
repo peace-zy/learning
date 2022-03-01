@@ -24,8 +24,17 @@ acc = []
 with P.no_grad():
     model.eval()
     segs = [tokenizer.encode(d) for d in data.split('\t')]
-    seg_a, seg_b = tokenizer.truncate(segs[0][0], segs[1][0], seqlen=max_seqlen)
+    #segs = [tokenizer.tokenize(d) for d in data.split('\t')]
+    print(len(segs[0][0]), len(segs[1][0]))
+    print(segs[0][0], segs[1][0])
+    # 每个句子开头会有cls token，句尾有sep，句子拼接时需要去除
+    seg_a, seg_b = tokenizer.truncate(segs[0][0][1:-1], segs[1][0][1:-1], seqlen=max_seqlen)
+    print(len(seg_a), len(seg_b))
+    print(seg_a, seg_b)
+    # 句子开头加token，句尾加sep
     sentence, segments = tokenizer.build_for_ernie(seg_a, seg_b)
+    print(len(sentence), len(segments))
+    print(sentence, segments)
     start = time.time()
     sentence = P.to_tensor(np.expand_dims(sentence, 0))
     segments = P.to_tensor(np.expand_dims(segments, 0))
