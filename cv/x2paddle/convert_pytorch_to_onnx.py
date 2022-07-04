@@ -15,7 +15,7 @@ img = np.transpose(img, (2, 0, 1))
 img = np.expand_dims(img, 0)
 
 ###########2. 加载pytorch模型
-pretrained_weights = '/home/zhangyan75/.cache/clip/ViT-B-32.pt'
+pretrained_weights = '/home/xxx/.cache/clip/ViT-B-32.pt'
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocssor = clip.load('ViT-B/32', device)
 model.eval()
