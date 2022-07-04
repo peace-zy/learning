@@ -33,7 +33,7 @@ torch.save(model.visual.float(), 'only_image.pth')
 
 ###########3. 先转换为onnx
 jit_type = "trace"    #转换类型
-export_onnx_file = "test.onnx"  #输出文件
+export_onnx_file = 'ViT-B-32-pt_to_pd_2_0.onnx'  #输出文件
 torch.onnx.export(model.visual.float(),
                     input_tensor,
                     export_onnx_file,
@@ -48,9 +48,8 @@ torch.onnx.export(model.visual.float(),
 print(model.visual.conv1.weight.dtype)
 
 import onnxruntime as ort
-ort_session = ort.InferenceSession('test.onnx')
+ort_session = ort.InferenceSession(export_onnx_file)
 o_outputs = ort_session.run(None, {'input': img.astype(np.float32)})
-#o_outputs = ort_session.run(None, {'input': img.astype(np.float16)})
 
 print(image_features.detach().cpu().numpy())
 print(o_outputs[0])
