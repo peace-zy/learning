@@ -11,3 +11,4 @@ x2paddle --framework=onnx --model=test_new.onnx.1.8.1 --save_dir=pd_model --para
 https://zhuanlan.zhihu.com/p/396948150
 
 [1]  CUDA_VISIBLE_DEVICES=2 python convert_pytorch_to_onnx.py
+[2] x2paddle --framework=onnx --model=ViT-B-32-pt_to_pd_2_0.onnx --save_dir=ViT-B-32_pd_model --params_merge. 
