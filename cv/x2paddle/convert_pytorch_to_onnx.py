@@ -42,7 +42,7 @@ torch.onnx.export(model.visual.float(),
                     training=False,
                     do_constant_folding=True,   # 是否执行常量折叠优化
                     input_names=["input"],  # 输入名
-                    output_names=["output1"],  # 输出名
+                    output_names=["output"],  # 输出名
                     )
 
 print(model.visual.conv1.weight.dtype)
