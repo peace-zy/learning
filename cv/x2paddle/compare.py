@@ -1,0 +1,10 @@
+import numpy as np
+out_pt = np.loadtxt('py_out.npy')
+out_pd = np.loadtxt('pd.npy')
+out_pd_v1_8_5 = np.loadtxt('pd8.5.1.npy')
+print('pt vs pd2.0')
+print(abs(out_pt - out_pd).max(), abs(out_pt -out_pd).min())
+print('pt vs pd1.8.5')
+print(abs(out_pt - out_pd_v1_8_5).max(), abs(out_pt -out_pd_v1_8_5).min())
+print('pd2.0 vs pd1.8.5')
+print(abs(out_pd - out_pd_v1_8_5).max(), abs(out_pd -out_pd_v1_8_5).min())
