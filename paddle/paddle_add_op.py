@@ -5,7 +5,11 @@ import traceback
 import sys
 import hashlib
 import copy
+import os
 
+save_path='modified_network'
+if not os.path.exists(save_path):
+    os.makedirs(save_path)
 def get_nhwc_conv_res(inputs, weights):
     import paddle.fluid as fluid
     import numpy as np
@@ -196,7 +200,8 @@ def get_nchw_res(nchw_inputs,
         f.write(model_str)
 
     export_exe = fluid.Executor(fluid.CPUPlace())
-    path = 'conv_nhwc_to_nchw'
+    global save_path
+    path = os.path.join(save_path, 'conv_nhwc_to_nchw')
     fluid.io.save_inference_model(dirname=path, feeded_var_names=['images'],
         target_vars=fetch_targets, executor=export_exe, main_program=inference_program, params_filename=params_filename)
 
@@ -208,7 +213,7 @@ def get_nchw_res(nchw_inputs,
     #output = results.copy_to_cpu()
     output = results[0]
     nchw_output = output.flatten()
-    np.savetxt('nchw_output_online_clip_pd8.5.1.npy', nchw_output)
+    np.savetxt(os.path.join(save_path, 'nchw_output_online_clip_pd8.5.1.npy'), nchw_output)
     return nchw_output
 
 
@@ -226,7 +231,8 @@ def get_nhwc_res(nhwc_inputs,
                   fetch_list=fetch_targets)
 
     nhwc_output = results[0].flatten()
-    np.savetxt('nhwc_output_online_clip_pd8.5.1.npy', nhwc_output)
+    global save_path
+    np.savetxt(os.path.join(save_path, 'nhwc_output_online_clip_pd8.5.1.npy'), nhwc_output)
 
 
     export_program = inference_program.clone()
@@ -286,7 +292,7 @@ def get_nhwc_res(nhwc_inputs,
         f.write(model_str)
 
     export_exe = fluid.Executor(fluid.CPUPlace())
-    path = 'add_unsqueeze_for_scale'
+    path = os.path.join(save_path, 'add_unsqueeze_for_scale')
     fluid.io.save_inference_model(dirname=path, feeded_var_names=['images'],
         target_vars=fetch_targets, executor=export_exe, main_program=inference_program, params_filename=params_filename)
 
@@ -298,7 +304,7 @@ def get_nhwc_res(nhwc_inputs,
     #output = results.copy_to_cpu()
     output = results[0]
     unsqueeze_nhwc_output = output.flatten()
-    np.savetxt('unsqueeze_nhwc_output_online_clip_pd8.5.1.npy', unsqueeze_nhwc_output)
+    np.savetxt(os.path.join(save_path, 'unsqueeze_nhwc_output_online_clip_pd8.5.1.npy'), unsqueeze_nhwc_output)
     diff = nhwc_output - unsqueeze_nhwc_output
     print('unsqueeze_to_scale  min={}\tmax={}'.format(diff.min(), diff.max()))
 
@@ -318,7 +324,7 @@ def main():
     model_filename = '__model__'
     params_filename = '__params__'
 
-    image = Image.open("../../CLIP-main/image/book.jpg")
+    image = Image.open("book.jpg")
     img = image.resize((224,224), resample=Image.BICUBIC)
     img = img.convert('RGB')
     img = np.array(img).astype("float32") / 255.0
@@ -345,25 +351,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    '''
-    path = 'ddfdfdfd'
-    debug_fetch_targets = [inference_program.global_block().var('patch_embedding.tmp_0')]
-    print(debug_fetch_targets)
-    fluid.io.save_inference_model(dirname=path, feeded_var_names=['images'],
-        target_vars=debug_fetch_targets, executor=exe, main_program=inference_program, params_filename=params_filename)
-    sys.exit(0)
-
-
-    export_program = inference_program.clone()
-    block = export_program.global_block()
-    block.vars.pop('images')
-    block.desc._remove_var(b'images')
-    block.create_var(name='new_images', shape=[-1, 3, 224, 224], dtype='float32')
-    export_exe = fluid.Executor(fluid.CPUPlace())
-
-    path = 'ddfdfdfd'
-    fluid.io.save_inference_model(dirname=path, feeded_var_names=['new_images'],
-        target_vars=fetch_targets, executor=export_exe, main_program=export_program, params_filename=params_filename)
-
-    sys.exit(0)
-    '''
