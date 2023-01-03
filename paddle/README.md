@@ -3,7 +3,7 @@
 # 离线调用clip
   infer_for_clip_offline.sh
 # 修改paddle模型conv dataformat NHWC to NHWC
- python paddle_add_op.py
+ python paddle_add_op.py  
  out: modified_network
 # paddle模型转onnx
  paddl2_to_onnx.sh
