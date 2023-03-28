@@ -1,0 +1,41 @@
+### vpt/src/models/vit_backbones/vit.py
+
+def quick_gelu(x):
+    return x * torch.sigmoid(1.702 * x)
+
+
+ACT2FN = {"gelu": torch.nn.functional.gelu, "relu": torch.nn.functional.relu, "swish": swish, "quick_gelu": quick_gelu}
+
+        #self.act_fn = ACT2FN["gelu"]
+        self.act_fn = ACT2FN["quick_gelu"]
+
+
+class Encoder(nn.Module):
+    def __init__(self, config, vis, pre_norm):
+        super(Encoder, self).__init__()
+        self.vis = vis
+        self.layer = nn.ModuleList()
+        # added by zy
+        self.pre_norm = pre_norm
+        if self.pre_norm:
+            self.pre_encoder_norm = LayerNorm(config.hidden_size, eps=1e-6)
+        #
+        self.encoder_norm = LayerNorm(config.hidden_size, eps=1e-6)
+        for _ in range(config.transformer["num_layers"]):
+            layer = Block(config, vis)
+            self.layer.append(copy.deepcopy(layer))
+
+    def forward(self, hidden_states):
+        attn_weights = []
+        # added by zy
+        if self.pre_norm:
+            hidden_states = self.pre_encoder_norm(hidden_states)
+        #
+        pdb.set_trace()
+        for layer_block in self.layer:
+            hidden_states, weights = layer_block(hidden_states)
+            if self.vis:
+                attn_weights.append(weights)
+        pdb.set_trace()
+        encoded = self.encoder_norm(hidden_states)
+        return encoded, attn_weights
