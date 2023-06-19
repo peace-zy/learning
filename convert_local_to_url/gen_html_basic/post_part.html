@@ -1,0 +1,47 @@
+<script>
+    function getImageSizeByUrl(url) {
+        return new Promise(function (resolve, reject) {
+            let image = new Image();
+            image.onload = function () {
+                resolve({
+                    width: image.width,
+                    height: image.height
+                });
+            };
+            image.onerror = function () {
+                reject(new Error('error'));
+            };
+            image.src = url;
+        });
+    }
+
+    async function getImageSize(img) {
+        if (img.naturalWidth) {
+            // 适用于Firefox/IE9/Safari/Chrome/Opera浏览器
+            return {
+                width: img.naturalWidth,
+                height: img.naturalHeight
+            }
+        } else {
+            return await getImageSizeByUrl(img.src);
+        }
+    }
+
+    (async () => {
+        let images = document.getElementsByTagName('img')
+        for (let i = 0; i < images.length; ++i) {
+            let ele = images[i];
+            let key = ele.id;
+            let img = document.querySelector('#' + key);
+            let size = await getImageSize(img);
+            let width = size['width'], height = size['height'];
+            let alt = ele.alt
+            let parts = alt.split(',');
+            let x = parseFloat(parts[0] * 100) / width, y = parseFloat(parts[1] * 100) / height;
+            let w = parseFloat(parts[2] * 100) / width, h = parseFloat(parts[3] * 100) / height;
+            let left = parseInt(x), right = parseInt((x + w)), top = parseInt(y), bottom = parseInt(y + h);
+            ele.style.clipPath = `polygon(${left}% ${top}%, ${right}% ${top}%, ${right}% ${bottom}%, ${left}% ${bottom}%)`;
+
+        }
+    })();
+</script>
