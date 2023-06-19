@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>Show_for_Analysis</title>
+</head>
+<body>
+    <div id="div_top" style="top:0px;left:50px;width:100%;height: 30px;position:absolute;">
+        <button onclick="Count()">汇总</button>
+        <button onclick="ExportData()">导出数据</button>
+        <button onclick="ExportHtml()">导出Html</button>
+        <button onclick="Clear()">清理缓存</button>
+    </div>
+
+<!--jspart-->
+<script language="javascript" type="text/javascript">
+    var name_id = {"Right": 0, "Wrong": 1, "Hold": 2}
+    var IN_TEXT_INDEX = 3
+    var ROW_START = 1
+    function update_radio(sender) {
+        sender.defaultChecked = !sender.defaultChecked;
+        //sender.checked = sender.defaultChecked;
+        sender.setAttribute("checked", sender.defaultChecked)
+        var row_id = sender.parentNode.parentNode.parentNode.rowIndex
+        var col_id = sender.parentNode.parentNode.cellIndex
+        var label_id = -1
+        if (sender.checked) {
+            label_id = name_id[sender.value]
+        }
+        set_item(row_id, col_id, label_id, "")
+    }
+
+    function update_text_with_click(sender) {
+        var row_id = sender.parentNode.parentNode.rowIndex
+        var col_id = sender.parentNode.cellIndex
+        var in_text = sender.value
+        var label_id = -2
+        console.log(sender)
+        sender.setAttribute("value", in_text)
+        console.log(sender)
+        set_item(row_id, col_id, label_id, in_text)
+    }
+
+    function update_text_with_button(sender) {
+        var row_id = sender.parentNode.parentNode.rowIndex
+        var col_id = sender.parentNode.cellIndex
+        var text = sender.parentNode.getElementsByTagName("input")[IN_TEXT_INDEX]
+        var in_text = text.value
+        var label_id = -2
+        console.log(sender)
+        text.setAttribute("value", in_text)
+        console.log(sender)
+        set_item(row_id, col_id, label_id, in_text)
+    }
+
+
+    function set_item(row_id, col_id, label_id, in_text) {
+    var show_table = window.document.getElementById("show_table")
+       var cell = show_table.rows[row_id].cells[col_id]
+       var key = window.document.baseURI
+       var r_c_key = "row_" + row_id + "col_" + col_id
+       var to_store = {"image": cell.children[0].childNodes[1].src, "row": row_id, "col": col_id, "des": cell.childNodes[2].textContent, "href": cell.childNodes[0].href}
+       if (localStorage.hasOwnProperty(key)) {
+           var cur_page_stored_data = JSON.parse(localStorage[key])
+           if (cur_page_stored_data.hasOwnProperty(r_c_key)) {
+               var cell_data = cur_page_stored_data[r_c_key]
+               if (label_id == -1) {
+                   delete cur_page_stored_data[r_c_key]
+               } else if (label_id == -2) {
+                   cell_data.in_text = in_text
+               } else {
+                   cell_data.label = label_id
+               }
+               localStorage.setItem(key, JSON.stringify(cur_page_stored_data))
+           } else {
+               if (label_id != -1 && label_id != -2) {
+                   to_store["label"] = label_id
+               }
+               if (label_id == -2) {
+                   to_store["in_text"] = in_text
+               }
+               cur_page_stored_data[r_c_key] = to_store
+               localStorage.setItem(key, JSON.stringify(cur_page_stored_data))
+           }
+       } else {
+
+           if (label_id != -1 && label_id != -2) {
+               to_store["label"] = label_id
+           }
+           if (label_id == -2) {
+               to_store["in_text"] = in_text
+           }
+           localStorage.setItem(key, JSON.stringify({[r_c_key]: to_store}))
+       }
+    }
+
+    function Clear() {
+        localStorage.clear()
+    }
+
+    function ExportHtml()
+    {
+        load()
+        var body = window.document.body
+        for (var i = 0; i < body.childNodes.length; ++i) {
+            if (body.childNodes[i].id == "fatkun-drop-panel") {
+                body.removeChild(body.childNodes[i])
+            }
+        }
+        var str = "<head><meta charset=\"utf-8\"></head>\n" + body.outerHTML+"</html>"
+        var blob=new Blob([str],{
+            type: "text/plain"
+        })
+
+        var tmpa = document.createElement("a");
+        //var p_h1=document.getElementsByClassName("p_h1")[0];
+        //console.log(p_h1)
+        var parts = window.location.href.split('/')
+        tmpa.download = parts[parts.length - 1]
+        //tmpa.download = window.location.href
+        //tmpa.download = (p_h1?p_h1.innerHTML:"test")+".html";
+        tmpa.href = URL.createObjectURL(blob);
+        tmpa.click();//导出后事件需要重新绑定，或者直接使用innHTML定义？
+        setTimeout(function () {
+            URL.revokeObjectURL(blob);
+        }, 100);
+    }
+
+    function Count() {
+        var num_image = 0
+        var num_region = 0
+        var num_right = 0
+        var num_wrong = 0
+        var num_hold = 0
+        var show_table = window.document.getElementById("show_table")
+        for (var i = ROW_START; i < show_table.rows.length; ++i) {
+            num_image += 1
+            var cells = show_table.rows[i].cells
+            for (var j = 0; j < cells.length; ++j) {
+                num_region += 1
+                var radio = cells[j].getElementsByClassName("radio-inline")
+                for (var k = 0; k < radio.length; ++k) {
+                    if (radio[k].children[0].checked) {
+                        var val = radio[k].children[0].value
+                        if (val == 'Right') {
+                            num_right += 1
+                        }
+                        else if (val == 'Wrong') {
+                            num_wrong += 1
+                        }
+                        else if (val == 'Hold') {
+                            num_hold += 1
+                        }
+                    }
+                }
+            }
+        }
+        alert("数量=" + num_region  + ", 对的数量=" + num_right + ", 错的数量=" + num_wrong + ", 待定数量=" + num_hold + ", 未标注数量=" + (num_region - num_right - num_wrong - num_hold) + ", 精确率=" + Number(100 * num_right / num_region).toFixed(2) + "%")
+
+    }
+
+    function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+        element.click();
+    }
+
+    function ExportData() {
+        var right_line = ""
+        var wrong_line = ""
+        var show_table = window.document.getElementById("show_table")
+        for (var i = ROW_START; i < show_table.rows.length; ++i) {
+            var cells = show_table.rows[i].cells
+            for (var j = 0; j < cells.length; ++j) {
+                img_src = cells[j].getElementsByTagName("img")[0].src
+                des = cells[j].childNodes[2].textContent
+                href = cells[j].childNodes[0].href
+                var input = cells[j].getElementsByTagName("input")
+                var in_text = input[IN_TEXT_INDEX].value
+                for (var k = 0; k < input.length; ++k) {
+                    if (input[k].type == "radio" && input[k].checked) {
+                        var val = input[k].value
+                        var winfo = img_src + "\t" + des + "\t" + in_text + "\t" + href + "\n"
+                        if (val == 'Right') {
+                            right_line += winfo
+                        }
+                        else if (val == 'Wrong') {
+                            wrong_line += winfo
+                        }
+                    }
+                }
+            }
+        }
+        download('right.txt', right_line)
+        download('wrong.txt', wrong_line)
+        alert("导出数据成功")
+
+    }
+
+    function open_html_to_localstorage() {
+        var show_table = window.document.getElementById("show_table")
+        for (var i = ROW_START; i < show_table.rows.length; ++i) {
+            for (var j = 0; j < show_table.rows[i].cells.length; ++j) {
+                var cell = show_table.rows[i].cells[j]
+                var input = cell.getElementsByTagName("input")
+                var in_text = input[IN_TEXT_INDEX].value
+                for (var k = 0; k < input.length; ++k) {
+                    if (input[k].type == "radio" && input[k].checked) {
+                        set_item(i, j, k, in_text)
+                    }
+                }
+            }
+        }
+    }
+
+    function load() {
+        if (localStorage.key) {
+           var k = window.document.baseURI
+           if (localStorage.hasOwnProperty(k)) {
+               var show_table = window.document.getElementById("show_table");
+               var cur_page_stored_data = JSON.parse(localStorage[k])
+               for (var r_c_key in cur_page_stored_data) {
+                   var cell_data = cur_page_stored_data[r_c_key]
+                   var row_id = cell_data.row
+                   var col_id = cell_data.col
+                   if (cell_data.hasOwnProperty("label")) {
+                      var label = cell_data.label
+                      if (label != -1) {
+                          var cell = show_table.rows[row_id].cells[col_id]
+                          var radio = cell.getElementsByClassName("radio-inline")
+                          for (var i = 0; i < radio.length; ++i) {
+                              if (radio[i].children[0].checked) {
+                                  radio[i].children[0].setAttribute("checked", false)
+                              }
+                          }
+                          radio[label].children[0].setAttribute("checked", true)
+                      }
+                   }
+
+                   if (cell_data.hasOwnProperty("in_text")) {
+                      var in_text = cell_data.in_text
+                      if (in_text) {
+                          var cell = show_table.rows[row_id].cells[col_id]
+                          var input = cell.getElementsByTagName("input")
+                          input[IN_TEXT_INDEX].setAttribute("value", in_text)
+                      }
+                   }
+               }
+           }
+        }
+    }
+
+    //刷新存储
+    window.onload = function () {
+        load()
+    }
+
+    if (window.document.readyState == "complete") {
+        if (!sessionStorage.getItem("isReload")) {
+            open_html_to_localstorage()
+            sessionStorage.setItem("isReload", true)
+        }
+    }
+
+</script>
