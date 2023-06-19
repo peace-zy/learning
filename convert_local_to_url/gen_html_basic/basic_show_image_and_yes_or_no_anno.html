@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>Show_for_Analysis</title>
+</head>
+<body bgcolor="white">
+    <div id="div_top" style="top:0px;left:50px;width:100%;height: 30px;position:absolute;">
+        <button onclick="Count()">汇总</button>
+        <button onclick="ExportData()">导出数据</button>
+        <button onclick="ExportHtml()">导出Html</button>
+        <button onclick="ExportDataDefalutRight()">导出数据-默认勾选正确</button>
+    </div>
+
+<!--jspart-->
+<script language="javascript" type="text/javascript">
+    function update(sender) {
+        console.log(sender);
+        sender.defaultChecked = !sender.defaultChecked;
+        sender.checked = sender.defaultChecked;
+    }
+
+    function ExportHtml()
+    {
+        var str=window.document.body.outerHTML+"</html>";
+        var blob=new Blob([str],{
+            type: "text/plain"
+        })
+
+        var tmpa = document.createElement("a");
+        //var p_h1=document.getElementsByClassName("p_h1")[0];
+        //console.log(p_h1)
+        var parts = window.location.href.split('/')
+        //console.log(parts)
+        tmpa.download = parts[parts.length - 1] + ".html"
+        //tmpa.download = (p_h1?p_h1.innerHTML:"test")+".html";
+        tmpa.href = URL.createObjectURL(blob);
+        tmpa.click();//导出后事件需要重新绑定，或者直接使用innHTML定义？
+        setTimeout(function () {
+            URL.revokeObjectURL(blob);
+        }, 100);
+    }
+    function Count() {
+        var num_image = 0
+        var num_region = 0
+        var num_right = 0
+        var num_wrong = 0
+        var num_hold = 0
+        var show_table =document.getElementById("show_table");
+        //console.log(show_table.rows)
+        //console.log(show_table.rows.length)
+        for (var i = 1; i < show_table.rows.length; ++i) {
+            num_image += 1
+            var cells = show_table.rows[i].cells
+            for (var j = 0; j < cells.length; ++j) {
+                num_region += 1
+                //console.log(cells[j].innerHTML)
+                //radios = cells[j].getElementsByClassName('radio-inline')
+                //for (var k = 0; k < radios.length; ++k) {
+                //    console.log(radios[k].getElementsByTagName('input').length)
+                //    console.log(radios[k].getElementsByTagName('input')[0].checked)
+                //}
+                radios = cells[j].getElementsByTagName('input')
+                for (var k = 0; k < radios.length; ++k) {
+                    //console.log(radios[k].checked)
+                    //console.log(radios[k].value)
+                    if (radios[k].checked) {
+                        if (radios[k].value == 'Right') {
+                            num_right += 1
+                        }
+                        else if (radios[k].value == 'Wrong') {
+                            num_wrong += 1
+                        }
+                        else if (radios[k].value == 'Hold') {
+                            num_hold += 1
+                        }
+                    }
+                }
+            }
+        }
+        alert("数量=" + num_region  + ", 对的数量=" + num_right + ", 错的数量=" + num_wrong + ", 待定数量=" + num_hold + ", 未标注数量=" + (num_region - num_right - num_wrong - num_hold) + ", 精确率=" + Number(100 * num_right / num_region).toFixed(2) + "%")
+
+    }
+
+    function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+        element.click();
+    }
+
+    function ExportData() {
+        var right_line = ""
+        var wrong_line = ""
+        var show_table =document.getElementById("show_table");
+        //console.log(show_table.rows)
+        //console.log(show_table.rows.length)
+        for (var i = 1; i < show_table.rows.length; ++i) {
+            var cells = show_table.rows[i].cells
+            for (var j = 0; j < cells.length; ++j) {
+                //console.log(cells[j].innerHTML)
+                //radios = cells[j].getElementsByClassName('radio-inline')
+                //for (var k = 0; k < radios.length; ++k) {
+                //    console.log(radios[k].getElementsByTagName('input').length)
+                //    console.log(radios[k].getElementsByTagName('input')[0].checked)
+                //}
+                img_src = cells[j].getElementsByTagName("img")[0].src
+                des = cells[j].childNodes[2].textContent
+                radios = cells[j].getElementsByTagName('input')
+                for (var k = 0; k < radios.length; ++k) {
+                    //console.log(radios[k].checked)
+                    //console.log(radios[k].value)
+                    if (radios[k].checked) {
+                        if (radios[k].value == 'Right') {
+                            right_line += img_src + "\t" + des + "\n"
+                        }
+                        else if (radios[k].value == 'Wrong') {
+                            wrong_line += img_src + "\t" + des + "\n"
+                        }
+                    }
+                }
+            }
+        }
+        console.log("right")
+        download('right.txt', right_line)
+        console.log("wrong")
+        download('wrong.txt', wrong_line)
+        alert("导出数据成功")
+
+    }
+
+    function ExportDataDefalutRight() {
+        var right_line = ""
+        var wrong_line = ""
+        var show_table =document.getElementById("show_table");
+        //console.log(show_table.rows)
+        //console.log(show_table.rows.length)
+        for (var i = 1; i < show_table.rows.length; ++i) {
+            var cells = show_table.rows[i].cells
+            for (var j = 0; j < cells.length; ++j) {
+                //console.log(cells[j].innerHTML)
+                //radios = cells[j].getElementsByClassName('radio-inline')
+                //for (var k = 0; k < radios.length; ++k) {
+                //    console.log(radios[k].getElementsByTagName('input').length)
+                //    console.log(radios[k].getElementsByTagName('input')[0].checked)
+                //}
+                img_src = cells[j].getElementsByTagName("img")[0].src
+                des = cells[j].childNodes[2].textContent
+                radios = cells[j].getElementsByTagName('input')
+                let found = false;
+                for (var k = 0; k < radios.length; ++k) {
+                    //console.log(radios[k].checked)
+                    //console.log(radios[k].value)
+                    if (radios[k].checked) {
+                        if (radios[k].value == 'Right') {
+                            right_line += img_src + "\t" + des + "\n"
+                        }
+                        else if (radios[k].value == 'Wrong') {
+                            wrong_line += img_src + "\t" + des + "\n"
+                        }
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    right_line += img_src + "\t" + des + "\n"
+                }
+            }
+        }
+        console.log("right")
+        download('right.txt', right_line)
+        console.log("wrong")
+        download('wrong.txt', wrong_line)
+        alert("导出数据成功")
+
+    }
+
+    //刷新存储
+    //window.onload = function () {
+    //    ExportHtml()
+    //}
+
+</script>
