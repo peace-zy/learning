@@ -1,0 +1,1 @@
+https://huggingface.co/SkyWork/SkyPaint/blob/main/text_encoder/config.json
