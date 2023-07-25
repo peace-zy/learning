@@ -27,3 +27,6 @@ CUDA_VISIBLE_DEVICES=4 python train_network.py \
 
 
 数据集合命名，epoch_触发词/ .caption表示prompt
+
+diffusers lora
+https://github.com/huggingface/diffusers/tree/main/examples/dreambooth
