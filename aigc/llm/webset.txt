@@ -1,0 +1,4 @@
+【大模型慢学】GPT起源以及GPT系列采用Decoder-only架构的原因探讨
+https://zhuanlan.zhihu.com/p/625184011?utm_id=0
+从GPT-1到GPT-4，GPT系列模型详解
+https://zhuanlan.zhihu.com/p/627901828
