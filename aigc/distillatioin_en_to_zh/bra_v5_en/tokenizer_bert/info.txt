@@ -1,1 +1,2 @@
 https://huggingface.co/SkyWork/SkyPaint/blob/main/text_encoder/config.json
+https://huggingface.co/google-bert/bert-base-multilingual-uncased/blob/main/config.json
