@@ -12,6 +12,7 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
+
 import re
 import argparse
 import logging
@@ -918,7 +919,6 @@ class ImageStore:
         path = self.image_files[ref[0]].split('/aistudio/workspace/aigc_ssd/')[-1]
         return self.data_df[self.data_df['img_path'] == path]['text'].values[0]
 
-
 class AspectDataset(torch.utils.data.Dataset):
     def __init__(self, store: ImageStore, device: torch.device):
         self.store = store
@@ -948,7 +948,7 @@ class AspectDataset(torch.utils.data.Dataset):
         input_ids = [example["input_ids"] for example in examples]
         return {"pixel_values": pixel_values, "input_ids": input_ids}
 
-
+# ref: https://github.com/harubaru/waifu-diffusion/blob/1a83e470a4b2358f0353bc0df513c19f6c09d63a/trainer/diffusers_trainer.py#L301
 class AspectBucket:
     def __init__(self, store: ImageStore,
                  num_buckets: int,
