@@ -1,0 +1,16 @@
+Q: sql 按照某列去重，保留其他列
+  
+在SQL中，你可以使用DISTINCT关键字来去重，但是它会应用于所有的列，而不仅仅是一个。如果你想要按照某一列去重，同时保留其他列的信息，你可以使用GROUP BY语句。
+
+假设你有一个名为employees的表，它有id, name, age, department等列，你想要按照name列去重，可以使用以下查询：
+
+SELECT id, name, age, department
+FROM (
+  SELECT id, name, age, department,
+         ROW_NUMBER() OVER(PARTITION BY name ORDER BY id) as rn
+  FROM employees
+) t
+WHERE t.rn = 1
+在这个查询中，ROW_NUMBER() OVER(PARTITION BY name ORDER BY id)会给每个name的每个不同的行一个唯一的行号。PARTITION BY name意味着行号会在每个新的name值时重置。ORDER BY id则决定了在同一个name值中，哪一行应该被赋予较小的行号。在外部查询中，WHERE t.rn = 1确保只选择每个name值的第一行。
+
+请注意，你需要根据你的具体需求来选择ORDER BY的列。例如，如果你想要每个name的最大id，你应该使用ORDER BY id DESC。
