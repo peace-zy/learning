@@ -13,3 +13,29 @@ rounded_num = num.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)
 
 print(rounded_num)
 这段代码将输出3.1。使用decimal模块进行四舍五入可以提供更高的精度和控制，特别是在处理金融数据时非常有用。
+
+
+def process_room_area_precision(input_str):
+    # 定义一个函数，用于格式化匹配到的数字
+    def format_match(match):
+        # 将匹配到的数字转换为浮点数，然后格式化为小数点后保留1位有效数字
+        match_str = match.group(0)
+        match_number = match.group(1)
+        #print(match_str, match_number)
+        #number = float(match_number)
+        #formatted_number = "{:.1f}".format(number)
+        #formatted_number = str(round(number, 1))
+        number = Decimal(match_number)
+        formatted_number = str(number.quantize(Decimal('0.1'), rounding=ROUND_HALF_UP))
+        #print(match_number, formatted_number)
+        #print("--")
+        formatted_number = match_str.replace(match_number, formatted_number)
+        return formatted_number
+
+    # 正则表达式，匹配小数点前最多两位数字，小数点后任意位数的数字
+    pattern = r"面积(\d{1,2}\.\d{2,})㎡"
+
+    # 使用re.sub替换原字符串中的数字部分为处理后的数字，传递format_match函数作为替换参数
+    output_str = re.sub(pattern, format_match, input_str)
+    #output_str = PATTERN_ROOM_AREA.sub(format_match, input_str)
+    return output_str
