@@ -1,0 +1,17 @@
+```jsonl
+{"category": "感知", "question_type": "选择题", "question": "户型图中显示的阳台的面积是多少？", "options": {"A": "3.0m²", "B": "4.2m²", "C": "5.0m²", "D": "6.0m²"}, "answer": "B"}
+{"category": "感知", "question_type": "选择题", "question": "图中哪个分间的面积最大？", "options": {"A": "客厅", "B": "卧室B", "C": "厨房", "D": "浴室A"}, "answer": "A"}
+{"category": "感知", "question_type": "选择题", "question": "哪个分间紧邻卧室C？", "options": {"A": "厨房", "B": "客厅", "C": "卧室B", "D": "卫生间A"}, "answer": "C"}
+{"category": "感知", "question_type": "选择题", "question": "该户型有几个卧室？", "options": {"A": "1个", "B": "2个", "C": "3个", "D": "4个"}, "answer": "C"}
+{"category": "感知", "question_type": "选择题", "question": "与卧室A相邻的分间是什么？", "options": {"A": "卧室B", "B": "阳台", "C": "卧室C", "D": "厨房"}, "answer": "B"}
+{"category": "认知", "question_type": "选择题", "question": "该户型中，厨房与卧室C的联系紧密度如何？", "options": {"A": "很远距离", "B": "相邻", "C": "有门相连", "D": "隔一分间"}, "answer": "D"}
+{"category": "认知", "question_type": "选择题", "question": "客厅与阳台之间的联系是否合理？", "options": {"A": "合理", "B": "不合理", "C": "阳台与客厅无连接", "D": "无从判断"}, "answer": "A"}
+{"category": "认知", "question_type": "选择题", "question": "厨房的采光和通风情况如何？", "options": {"A": "无法判断", "B": "采光良好，但通风不好", "C": "通风好，采光不好", "D": "采光和通风都很好"}, "answer": "D"}
+{"category": "认知", "question_type": "选择题", "question": "卧室A和卧室B的私密性如何？", "options": {"A": "很差，相互干扰", "B": "较好，互不干扰", "C": "一般，有些干扰", "D": "无法判断"}, "answer": "B"}
+{"category": "认知", "question_type": "选择题", "question": "户型中的入户门正对什么空间？", "options": {"A": "客厅", "B": "厨房", "C": "卫生间A", "D": "卧室A"}, "answer": "C"}
+{"category": "逻辑", "question_type": "选择题", "question": "如果用户想要一个专门的书房，该户型是否合适？", "options": {"A": "不合适，所有卧室已经被占用", "B": "合适，可以将卧室C设为书房", "C": "不合适，书房会影响卧室隐私", "D": "合适，卧室A足够大，可以分隔出书房"}, "answer": "B"}
+{"category": "逻辑", "question_type": "选择题", "question": "如果有五口之家且需要一个储物间，是否可以满足", "options": {"A": "可以，已有现成储物间", "B": "不可以，户型空间不够", "C": "可以，改造某一卧室即可", "D": "不可以，该户型不应改造"}, "answer": "B"}
+{"category": "逻辑", "question_type": "选择题", "question": "客厅是否能够容纳一个家庭影院系统？", "options": {"A": "可以，有非常大的空间", "B": "不可以，空间太小", "C": "无法判断", "D": "只能部分容纳"}, "answer": "A"}
+{"category": "逻辑", "question_type": "选择题", "question": "户型中的卧室分布是否适合有老人同住的家庭？", "options": {"A": "不适合，老人与年轻人卧室相通", "B": "适合，老人有独立的卧室C", "C": "不适合，老人的卧室没有隐私", "D": "合适，但要进行一些改造"}, "answer": "B"}
+{"category": "逻辑", "question_type": "选择题", "question": "根据图片文字，如果把厨房的面积扩大到10m², 哪些空间会受到影响？", "options": {"A": "客厅", "B": "卫生间B", "C": "卧室A", "D": "卧室B"}, "answer": "B"}
+```

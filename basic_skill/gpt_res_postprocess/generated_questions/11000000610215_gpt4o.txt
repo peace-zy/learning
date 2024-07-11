@@ -1,0 +1,17 @@
+{"category": "感知", "question_type": "选择题", "question": "二楼总共有几个房间？", "options": {"A": 1, "B": 2, "C": 3, "D": 4}, "answer": "A"}
+{"category": "感知", "question_type": "选择题", "question": "厨房的面积是多少？", "options": {"A": 3.7平米", "B": 4.1平米", "C": 4.3平米", "D": 4.8平米}, "answer": "C"}
+{"category": "感知", "question_type": "选择题", "question": "与卫生间B相邻的房间是什么？", "options": {"A": 卧室", "B": 客厅", "C": 厨房", "D": 储藏室}, "answer": "A"}
+{"category": "感知", "question_type": "选择题", "question": "一楼阳台A的面积是多少？", "options": {"A": 4.1平米", "B": 4.5平米", "C": 4.8平米", "D": 5.0平米}, "answer": "A"}
+{"category": "感知", "question_type": "选择题", "question": "从入户门进入，首先进入到哪个房间？", "options": {"A": 厨房", "B": 卧室", "C": 客厅", "D": 卫生间A}, "answer": "A"}
+
+{"category": "认知", "question_type": "选择题", "question": "从厨房到客厅是否需要经过卫生间A？", "options": {"A": 是", "B": 否"}, "answer": "B"}
+{"category": "认知", "question_type": "选择题", "question": "卫生间B的窗户是否有利于通风？", "options": {"A": 是", "B": 否", "C": 无窗"}, "answer": "A"}
+{"category": "认知", "question_type": "选择题", "question": "是否存在房间之间的门对门现象？", "options": {"A": 是", "B": 否"}, "answer": "A"}
+{"category": "认知", "question_type": "选择题", "question": "从卧室到达二楼阳台，是否需要通过客厅？", "options": {"A": 是", "B": 否"}, "answer": "B"}
+{"category": "认知", "question_type": "选择题", "question": "厨房与客厅之间是否有墙隔开？", "options": {"A": 是", "B": 否"}, "answer": "A"}
+
+{"category": "推理", "question_type": "简答题", "question": "这个户型中所有阳台的面积总和是多少？", "options": {}, "answer": "8.1平米"}
+{"category": "推理", "question_type": "简答题", "question": "客厅和卧室的面积和是多少？", "options": {}, "answer": "33.7平米"}
+{"category": "推理", "question_type": "选择题", "question": "如果有小孩需要安全游戏空间，最好安排在哪？", "options": {"A": 客厅", "B": 阳台A", "C": 阳台B", "D": 卧室"}, "answer": "A"}
+{"category": "推理", "question_type": "选择题", "question": "哪一层的采光更好？", "options": {"A": 一楼", "B": 二楼", "C": 不好判断"}, "answer": "B"}
+{"category": "推理", "question_type": "选择题", "question": "如果需要增加一个储物间，最有可能放在哪里？", "options": {"A": 卧室", "B": 客厅", "C": 厨房", "D": 阳台A"}, "answer": "D"}

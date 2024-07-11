@@ -1,0 +1,16 @@
+
+{"category": "感知", "question_type": "简答题", "question": "餐厅的面积是多少？", "options": {}, "answer": "8.7平米"}
+{"category": "感知", "question_type": "选择题", "question": "从次卧A出来，直视下方是下列哪个空间？", "options": {"A": "客厅", "B": "卫生间", "C": "阳台", "D": "次卧B"}, "answer": "B"}
+{"category": "感知", "question_type": "简答题", "question": "客卫的面积有多大？", "options": {}, "answer": "4.9平米"}
+{"category": "感知", "question_type": "选择题", "question": "客厅南边连接了哪个空间？", "options": {"A": "阳台", "B": "卫生间", "C": "厨房", "D": "次卧A"}, "answer": "A"}
+{"category": "感知", "question_type": "简答题", "question": "厨房的面积是多少平米？", "options": {}, "answer": "7.4平米"}
+{"category": "认知", "question_type": "选择题", "question": "该户型的厨房是否独立于其他主要功能区？", "options": {"A": "是", "B": "否"}, "answer": "A"}
+{"category": "认知", "question_type": "选择题", "question": "主卧的布局是否符合隐私保护？", "options": {"A": "是，主卧门与其他门不对称", "B": "否，主卧门正对其他房间"}, "answer": "A"}
+{"category": "认知", "question_type": "选择题", "question": "客卫是否对入户门？", "options": {"A": "是", "B": "否"}, "answer": "B"}
+{"category": "认知", "question_type": "简答题", "question": "主卧是否享有较好的采光？", "options": {}, "answer": "是，主卧有大窗户"}
+{"category": "认知", "question_type": "简答题", "question": "客厅和餐厅之间的动线是否合理？", "options": {}, "answer": "合理，二者连通良好"}
+{"category": "推理", "question_type": "简答题", "question": "主卧和次卧B的总面积是多少？", "options": {}, "answer": "49平米"}
+{"category": "推理", "question_type": "选择题", "question": "用户希望三口之家有独立的两个儿童房，是否适合这个户型？", "options": {"A": "适合", "B": "不适合"}, "answer": "A"}
+{"category": "推理", "question_type": "简答题", "question": "如果需要增加一个书房，可以选择哪个房间的空间来改造？", "options": {}, "answer": "次卧A或次卧B"}
+{"category": "推理", "question_type": "选择题", "question": "用户需要一个大型会议桌放在客厅，该户型是否满足要求？", "options": {"A": "满足，客厅空间大", "B": "不满足，客厅空间不够"}, "answer": "A"}
+{"category": "推理", "question_type": "选择题", "question": "如果用户想要有单独的居家办公空间，该户型是否合适？", "options": {"A": "合适，有独立空间可用", "B": "不合适，没有多余空间"}, "answer": "A"}
