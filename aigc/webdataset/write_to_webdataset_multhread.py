@@ -23,6 +23,8 @@ def process_thread(idx, data_f, save_dir, encode_format="jpg"):
     bar = tqdm(total=len(dataset["test"]), desc=f"thread_{idx}")
     for data_idx, data in enumerate(dataset['test']):
         sample = {}
+        # 通过这里加层级目录
+        #sample["__key__"] = "dir/ymcc_100m_%06d" % data_idx
         sample["__key__"] = "ymcc_100m_%06d" % data_idx
         # 创建一个字节流管道
         img_bytes = io.BytesIO()
