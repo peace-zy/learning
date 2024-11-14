@@ -84,10 +84,9 @@ def dataset2tar(data_files, save_dir, encode_format="jpg"):
             clear_cache()
 
 def main():
-    data_path = "/chubao/tz-data-two/multimodal/YFCC-100M/justram/yfcc100m_openai_subset/train"
+    data_path = "multimodal/YFCC-100M/justram/yfcc100m_openai_subset/train"
     data_files = [(idx, os.path.join(data_path, parquet_file)) for idx, parquet_file in enumerate(os.listdir(data_path))]
-    #save_dir = "/mnt/cfs/multimodal_data/YFCC-100M/images"
-    save_dir = "/mnt/cfs/chubaofs-tz01-mm-data/multimodal_data/YFCC-100M/images"
+    save_dir = "multimodal_data/YFCC-100M/images"
     os.makedirs(save_dir, exist_ok=True)
     clear_cache()
     #data_files = data_files[7:]
