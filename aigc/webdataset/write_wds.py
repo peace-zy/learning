@@ -45,7 +45,7 @@ def process_thread(idx, data_f, save_jsonl_dir, save_tar_dir, encode_format="jpg
                         if not os.path.exists(frame_path):
                             print(f"{frame_path} not exists")
                             continue
-                        rel_path = frame_path.replace("/nvme4/digit_human/caiyue014/", "")
+                        rel_path = frame_path.replace("xxx", "")
                         out_frame_path_list.append(rel_path)
                         subdir, image_name = os.path.split(rel_path)
                         image_name = image_name.split(".")[0]
