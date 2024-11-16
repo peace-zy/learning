@@ -405,7 +405,7 @@ class StableDiffusionPipeline(
                 prompt_embeds = self.text_encoder(text_input_ids.to(device), attention_mask=attention_mask, output_hidden_states=True)
                 pooled_prompt_embeds = prompt_embeds.pooler_output
                 prompt_embeds = prompt_embeds[0]
-                
+
             else:
                 prompt_embeds = self.text_encoder(
                     text_input_ids.to(device), attention_mask=attention_mask, output_hidden_states=True
@@ -1094,7 +1094,7 @@ class StableDiffusionPipeline(
                 )
             else:
                 negative_add_time_ids = add_time_ids
-            
+
             if self.do_classifier_free_guidance:
                 add_text_embeds = torch.cat([negative_pooled_prompt_embeds, add_text_embeds], dim=0)
                 add_time_ids = torch.cat([negative_add_time_ids, add_time_ids], dim=0)
@@ -1102,7 +1102,7 @@ class StableDiffusionPipeline(
             add_time_ids = add_time_ids.to(device)
             if added_cond_kwargs is None:
                 added_cond_kwargs = {}
-            
+
             added_cond_kwargs['time_ids'] = add_time_ids
             added_cond_kwargs['text_embeds'] = add_text_embeds
 
