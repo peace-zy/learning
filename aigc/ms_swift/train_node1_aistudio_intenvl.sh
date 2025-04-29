@@ -10,7 +10,7 @@ date
 
 rm -rf ~/.cache/pip
 conda clean --all -y
-#pip install /mnt/bella/users/zhangyan/software/flash_attn-2.7.2.post1+cu12torch2.4cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+
 
 pip config set global.trusted-host nexus.kcs.ke.com
 pip config set global.index-url http://nexus.kcs.ke.com/repository/kcs-pip-proxy/simple
